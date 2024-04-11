@@ -166,3 +166,6 @@ cython_debug/
 
 # Custom ignores
 .DS_Store
+
+.comet_token
+.comet_workspace

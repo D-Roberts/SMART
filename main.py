@@ -4,8 +4,12 @@
 # SPDX-License-Identifier: MIT
 #
 import os
+from pathlib import Path
 
 import numpy as np
+from comet_ml import Experiment
+from comet_ml.integration.pytorch import log_model
+
 import torch
 
 os.environ["TOKENIZERS_PARALLELISM"] = "1"
@@ -27,6 +31,15 @@ import losses
 import net
 import utils
 
+
+API_KEY = Path(".comet_token").read_text().strip()
+workspace = Path(".comet_workspace").read_text().strip()
+
+experiment = Experiment(
+    api_key=API_KEY,
+    project_name="test_merl",
+    workspace=workspace,
+)
 
 def reset_state(args):
     #    global seed
@@ -53,6 +66,8 @@ def train(args, dataloader, im_backbone):
         model = net.SMART_Net(args, im_backbone=im_backbone)
 
     model = model.cuda()
+    log_model(experiment, model, model_name="TheModel")
+
     parameters = model.parameters()
     if not args.no_meta:
         anshead_parameters = list(model.ans_decoder.parameters())
