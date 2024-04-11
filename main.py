@@ -24,7 +24,7 @@ import time
 import torch.nn.functional as F
 from tqdm import tqdm
 
-import build_vocab as vocab_utils
+import vocab_utils
 import data_loader as dl
 import globvars as gv
 import losses
