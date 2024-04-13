@@ -248,7 +248,7 @@ def train(args, dataloader, im_backbone):
     best_model = None
     best_acc = 0
     no_improvement = 0
-    num_thresh_epochs = 20
+    num_thresh_epochs = 8
     # stop training if there is no improvement after this.
     print("starting training...")
     for epoch in range(args.num_epochs):
@@ -315,7 +315,7 @@ if __name__ == "__main__":
         "--puzzles", default="all", type=str, help="comma separated / all / puzzle groups (counting,math etc.)"
     )
     parser.add_argument("--batch_size", default=64, type=int, help="batch size (16)")
-    parser.add_argument("--num_epochs", default=100, type=int, help="epoch")
+    parser.add_argument("--num_epochs", default=10, type=int, help="epoch")
     parser.add_argument("--lr", default=0.001, type=float, help="learning rate (0.001)")
     parser.add_argument("--test_file", type=str, help="csv file for train")
     parser.add_argument(
@@ -351,7 +351,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--split_type", type=str, default="standard", help="type of data split: stanard/exclude/puzzle/fewshot"
     )
-    parser.add_argument("--word_embed", type=str, default="standard", help="standard/gpt/glove")
+    parser.add_argument("--word_embed", type=str, default="bert", help="standard/gpt/glove")
     parser.add_argument(
         "--use_single_image_head", action="store_true", help="use a single image head for all the puzzles?"
     )
