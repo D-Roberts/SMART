@@ -37,7 +37,7 @@ workspace = Path(".comet_workspace").read_text().strip()
 
 experiment = Experiment(
     api_key=API_KEY,
-    project_name="test_merl",
+    project_name="vlm_reasoners",
     workspace=workspace,
 )
 
@@ -321,7 +321,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_root",
         type=str,
-        default="/homes/cherian/train_data/NAR/SMART/SMART_cpl/VLPS_v2/224/",
+        default="",
         help="location of the csv files, and location of the images, relative location is provided in the csv file.",
     )
     parser.add_argument("--train_diff", type=str, default="easy", help="easy/medium/hard")
@@ -337,9 +337,9 @@ if __name__ == "__main__":
     parser.add_argument("--num_workers", type=int, default=16, help="number of workers")
     parser.add_argument("--pretrained", type=str, help="should use a pretrained model?")
     parser.add_argument("--optimizer", type=str, default="adam", help="optimizer to use")
-    parser.add_argument("--loss_type", type=str, default="regression", help="classifier/regression")
+    parser.add_argument("--loss_type", type=str, default="classification", help="classifier/regression")
     parser.add_argument("--model_name", type=str, help="model to use resnet50/resnet18/...")
-    parser.add_argument("--seed", type=int, default=-1, help="seed to use")
+    parser.add_argument("--seed", type=int, default=0, help="seed to use")
     parser.add_argument("--data_tot", type=int, default=2000, help="how many instances to use for train+val+test")
     parser.add_argument("--use_clip_text", action="store_true", help="should use clip text embeddings?")
     parser.add_argument("--no_meta", action="store_true", help="do not use meta learning for optimization?")
@@ -358,7 +358,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--fsK", type=int, default=100, help="how many samples should we use to train in a fewshot setting?"
     )
-    parser.add_argument("--log_freq", type=int, default=50, help="log frequency?")
+    parser.add_argument("--log_freq", type=int, default=1, help="log frequency?")
     parser.add_argument("--test", action="store_true", help="evaluate a model?")
     parser.add_argument("--train_backbone", action="store_true", help="train the image backbone?")
     parser.add_argument("--no_question", action="store_true", help="do not use questions?")
